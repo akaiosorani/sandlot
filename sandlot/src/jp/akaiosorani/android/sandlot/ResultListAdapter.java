@@ -13,7 +13,7 @@ public class ResultListAdapter extends ArrayAdapter<ResultItem> {
 	private List<ResultItem> items;
 	
 	ResultListAdapter(Context context, List<ResultItem> items) {
-		super(context, -1, items);
+		super(context, android.R.layout.simple_list_item_1, items);
 		this.items = items;
 	}
 	

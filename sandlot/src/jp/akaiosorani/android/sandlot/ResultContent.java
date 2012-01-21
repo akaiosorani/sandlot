@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.io.Serializable;
 import java.io.StringBufferInputStream;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -31,7 +30,7 @@ import com.google.code.rome.android.repackaged.com.sun.syndication.io.SyndFeedIn
 
 import android.net.Uri;
 
-public class ResultContent implements Serializable {
+public class ResultContent {
 
 	private static final HttpTransport transport = AndroidHttp.newCompatibleTransport();
 	
@@ -41,8 +40,14 @@ public class ResultContent implements Serializable {
 	private byte[] originalBytes = null;
     private SyndFeed feed = null;
 
+    private String uri;
+    
     public static ResultContent getResult(String uri) {
     	return results.get(uri);
+    }
+    
+    public ResultContent(String uri) {
+    	this.uri = uri;
     }
     
     public String getOriginal() {
@@ -79,13 +84,18 @@ public class ResultContent implements Serializable {
     public List<ResultItem> getItems() {
     	List<ResultItem> items = new ArrayList<ResultItem>();
     	List<SyndEntry> list = feed.getEntries();
-    	ListIterator<SyndEntry> it = list.listIterator();
-    	for(;it.hasNext();) {
-    		SyndEntry e = it.next();
-    		ResultItem item = new ResultItem(e);
+    	for (int i=0;i<list.size();i++) {
+    		SyndEntry e = list.get(i);
+    		ResultItem item = new ResultItem(e, uri, i);
     		items.add(item);
     	}
     	return items;
+    }
+
+    public ResultItem getItem(int position) {
+    	List<SyndEntry> list = feed.getEntries();
+    	SyndEntry entry = list.get(position);
+    	return new ResultItem(entry, uri, position);
     }
     
 	public void load(Uri uri) {

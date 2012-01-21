@@ -22,7 +22,7 @@ public class FeedLoadingTask extends AsyncTask<Uri, Integer, ResultContent> {
 	@Override
     protected ResultContent doInBackground(Uri... params) {
 		uri = params[0];
-    	ResultContent content = new ResultContent();
+    	ResultContent content = new ResultContent(uri.toString());
 //    	content.load(uri);
     	content.loadTest(uri, "/sdcard/murakami10.rss");
 	    return content;
