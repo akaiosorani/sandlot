@@ -23,7 +23,8 @@ public class FeedLoadingTask extends AsyncTask<Uri, Integer, ResultContent> {
     protected ResultContent doInBackground(Uri... params) {
 		uri = params[0];
     	ResultContent content = new ResultContent();
-    	content.parse(uri);
+//    	content.load(uri);
+    	content.loadTest(uri, "/sdcard/murakami10.rss");
 	    return content;
     }
 	
@@ -40,7 +41,8 @@ public class FeedLoadingTask extends AsyncTask<Uri, Integer, ResultContent> {
 	@Override
 	protected void onPostExecute(ResultContent result) {
 		dialog.hide();
-        Intent intent = new Intent(parent, ContentActivity.class);
+//        Intent intent = new Intent(parent, ContentActivity.class);
+        Intent intent = new Intent(parent, ResultListActivity.class);
     	intent.putExtra("uri", uri.toString());
     	parent.startActivityForResult(intent, 0);
 	}

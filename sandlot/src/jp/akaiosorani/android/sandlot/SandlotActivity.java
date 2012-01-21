@@ -49,8 +49,7 @@ public class SandlotActivity extends Activity {
     	String queryString = searcher.getQueryString();
     	Toast.makeText(this, queryString, Toast.LENGTH_LONG).show();
 
-    	Uri query = searcher.getQuery();
-    	
+    	Uri query = searcher.build();
     	FeedLoadingTask task = new FeedLoadingTask(this);
     	task.execute(query);    	
     }

@@ -1,10 +1,17 @@
 package jp.akaiosorani.android.sandlot;
 
 
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.Serializable;
+import java.io.StringBufferInputStream;
+import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
@@ -29,10 +36,16 @@ public class ResultContent implements Serializable {
 	
 	private static final Map<String, ResultContent> results = new HashMap<String, ResultContent>();
 
+	private String original = null;
+	private byte[] originalBytes = null;
     private SyndFeed feed = null;
 
     public static ResultContent getResult(String uri) {
     	return results.get(uri);
+    }
+    
+    public String getOriginal() {
+    	return original;
     }
     public String getUri() {
     	return feed.getUri();
@@ -40,6 +53,14 @@ public class ResultContent implements Serializable {
 
     public String getTitle() {
     	return feed.getTitle();
+    }
+    public String getTitle(int index) {
+    	List<SyndEntry> list = feed.getEntries();
+    	return list.get(index).getTitle();
+    }
+    
+    public int Count() {
+    	return feed.getEntries().size();
     }
     
     public String getContent() {
@@ -54,7 +75,8 @@ public class ResultContent implements Serializable {
     	return content.toString();
     }
     
-	public void parse(Uri uri) {
+    
+	public void load(Uri uri) {
         GenericUrl url = new GenericUrl(uri.toString());
         HttpRequestFactory requestFactory = transport.createRequestFactory(new HttpRequestInitializer() {
             @Override
@@ -64,10 +86,14 @@ public class ResultContent implements Serializable {
         });
         try {
         	HttpRequest request = requestFactory.buildGetRequest(url);
-	        Reader reader = new InputStreamReader(request.execute().getContent());
+        	original = request.execute().parseAsString();
+        	parse();
+/*
+        	Reader reader = new InputStreamReader(new StringBufferInputStream(original));
 	        SyndFeedInput input = new SyndFeedInput();
 	        feed = input.build(reader);
-
+	        reader.close();
+*/
 	        results.put(uri.toString(), this);
         } catch (IOException e) {
 	        // TODO Auto-generated catch block
@@ -75,9 +101,50 @@ public class ResultContent implements Serializable {
         } catch (IllegalArgumentException e) {
 	        // TODO Auto-generated catch block
 	        e.printStackTrace();
+/*
         } catch (FeedException e) {
+	        // TODO Auto-generated catch block
+	        e.printStackTrace();
+*/
+        }
+	}
+	
+	private void parse() {
+        try {
+        	Reader reader = new InputStreamReader(new ByteArrayInputStream(originalBytes));
+            SyndFeedInput input = new SyndFeedInput();
+	        feed = input.build(reader);
+	        reader.close();
+        } catch (IllegalArgumentException e) {
+	        // TODO Auto-generated catch block
+	        e.printStackTrace();
+        } catch (FeedException e) {
+	        // TODO Auto-generated catch block
+	        e.printStackTrace();
+        } catch (IOException e) {
 	        // TODO Auto-generated catch block
 	        e.printStackTrace();
         }
 	}
+
+	public void loadTest(Uri uri, String filename) {
+    	File f = new File(filename);
+    	byte[] buffer = new byte[(int)f.length()];
+    	InputStream stream;
+        try {
+	        stream = new FileInputStream(f);
+	        stream.read(buffer);
+	    	originalBytes = buffer;
+	    	original = new String(buffer, "utf-8");
+	    	stream.close();
+        } catch (FileNotFoundException e) {
+	        // TODO Auto-generated catch block
+	        e.printStackTrace();
+        } catch (IOException e) {
+	        // TODO Auto-generated catch block
+	        e.printStackTrace();
+        }
+    	parse();
+        results.put(uri.toString(), this);
+    }
 }
