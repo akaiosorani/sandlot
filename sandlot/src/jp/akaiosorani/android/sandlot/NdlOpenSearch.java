@@ -8,7 +8,7 @@ public class NdlOpenSearch {
 
 	private static String URI_FORMAT = "%s?cnt=%d";
 	
-	private int count = 20;
+	private int count = 10;
 	
 	private String title = null;
 	

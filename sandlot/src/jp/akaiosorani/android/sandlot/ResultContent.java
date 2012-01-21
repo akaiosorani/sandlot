@@ -1,6 +1,5 @@
 package jp.akaiosorani.android.sandlot;
 
-
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -9,13 +8,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.io.StringBufferInputStream;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
+
+import org.apache.http.util.ByteArrayBuffer;
 
 import com.google.api.client.extensions.android2.AndroidHttp;
 import com.google.api.client.http.GenericUrl;
@@ -108,26 +107,24 @@ public class ResultContent {
         });
         try {
         	HttpRequest request = requestFactory.buildGetRequest(url);
-        	original = request.execute().parseAsString();
-        	parse();
-/*
-        	Reader reader = new InputStreamReader(new StringBufferInputStream(original));
-	        SyndFeedInput input = new SyndFeedInput();
-	        feed = input.build(reader);
-	        reader.close();
-*/
-	        results.put(uri.toString(), this);
+        	InputStream stream = request.execute().getContent();
+        	if (stream != null) {
+        		ByteArrayBuffer buffer = new ByteArrayBuffer(0);
+        		int v = stream.read();
+        		while(v != -1) {
+        			buffer.append(v);
+        			v = stream.read();
+        		}
+        		originalBytes = new byte[buffer.length()];
+        		System.arraycopy(buffer.buffer(), 0, originalBytes, 0, buffer.length());
+    	    	original = new String(originalBytes, "utf-8");
+            	parse();
+    	        results.put(uri.toString(), this);
+        	}
         } catch (IOException e) {
-	        // TODO Auto-generated catch block
 	        e.printStackTrace();
         } catch (IllegalArgumentException e) {
-	        // TODO Auto-generated catch block
 	        e.printStackTrace();
-/*
-        } catch (FeedException e) {
-	        // TODO Auto-generated catch block
-	        e.printStackTrace();
-*/
         }
 	}
 	
@@ -138,13 +135,10 @@ public class ResultContent {
 	        feed = input.build(reader);
 	        reader.close();
         } catch (IllegalArgumentException e) {
-	        // TODO Auto-generated catch block
 	        e.printStackTrace();
         } catch (FeedException e) {
-	        // TODO Auto-generated catch block
 	        e.printStackTrace();
         } catch (IOException e) {
-	        // TODO Auto-generated catch block
 	        e.printStackTrace();
         }
 	}
@@ -160,10 +154,8 @@ public class ResultContent {
 	    	original = new String(buffer, "utf-8");
 	    	stream.close();
         } catch (FileNotFoundException e) {
-	        // TODO Auto-generated catch block
 	        e.printStackTrace();
         } catch (IOException e) {
-	        // TODO Auto-generated catch block
 	        e.printStackTrace();
         }
     	parse();
