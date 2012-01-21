@@ -12,6 +12,7 @@ import java.io.Reader;
 import java.io.Serializable;
 import java.io.StringBufferInputStream;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
@@ -75,6 +76,17 @@ public class ResultContent implements Serializable {
     	return content.toString();
     }
     
+    public List<ResultItem> getItems() {
+    	List<ResultItem> items = new ArrayList<ResultItem>();
+    	List<SyndEntry> list = feed.getEntries();
+    	ListIterator<SyndEntry> it = list.listIterator();
+    	for(;it.hasNext();) {
+    		SyndEntry e = it.next();
+    		ResultItem item = new ResultItem(e);
+    		items.add(item);
+    	}
+    	return items;
+    }
     
 	public void load(Uri uri) {
         GenericUrl url = new GenericUrl(uri.toString());

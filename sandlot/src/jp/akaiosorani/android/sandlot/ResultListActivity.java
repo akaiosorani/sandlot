@@ -1,15 +1,21 @@
 package jp.akaiosorani.android.sandlot;
 
+import java.util.List;
+
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
 import android.webkit.WebView;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 public class ResultListActivity extends Activity {
 	ListView resultListView;
-	private ArrayAdapter<String> adapter;
+	List<ResultItem> items;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -24,16 +30,36 @@ public class ResultListActivity extends Activity {
             Toast.makeText(this, uriString, Toast.LENGTH_LONG).show();
             ResultContent content = ResultContent.getResult(uriString);
 
-            int count = content.Count();
-            String[] items = new String[count];
-            for(int i=0;i<count;i++) {
-            	items[i] = content.getTitle(i);
-            }
-            adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
-            
+            items = content.getItems();
+            ResultListAdapter adapter = new ResultListAdapter(this, items);
             resultListView.setAdapter(adapter);
+        
+            setClickEvent();
         }
     }
 	
+	private void setClickEvent() {
+		resultListView.setOnItemClickListener(listener);
+		resultListView.setOnItemLongClickListener(listener2);
+	}
+	
+	private OnItemClickListener listener = new OnItemClickListener() {
+
+		@Override
+        public void onItemClick(AdapterView<?> arg0, View view, int position, long id) {
+	        // TODO Auto-generated method stub
+	        
+        }
+	};
+	
+	private OnItemLongClickListener listener2 = new OnItemLongClickListener() {
+
+		@Override
+        public boolean onItemLongClick(AdapterView<?> arg0, View view, int position, long id) {
+			ResultItem item = items.get(position);
+			item.goToLink(ResultListActivity.this);
+	        return false;
+        }
+	};
 
 }
