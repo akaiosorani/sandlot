@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="gen"/>
+	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
+	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
+	<classpathentry kind="lib" path="/home/sk00ru/github/javalib/ghc/google-http-client-1.6.0-beta.jar"/>
+	<classpathentry kind="lib" path="/home/sk00ru/github/javalib/ghc/google-http-client-extensions-android2-1.6.0-beta.jar"/>
+	<classpathentry kind="lib" path="/home/sk00ru/github/javalib/guava-11.0.1.jar"/>
+	<classpathentry kind="lib" path="/home/sk00ru/github/javalib/android-rome-feed-reader-1.0.0-r2.jar"/>
+	<classpathentry kind="lib" path="/home/sk00ru/github/javalib/jdom-1.1.1-android-fork.jar"/>
+	<classpathentry kind="output" path="bin/classes"/>
+</classpath>
