@@ -10,9 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 public class SandlotActivity extends Activity {
@@ -25,6 +23,7 @@ public class SandlotActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
+        ResultItem.Init(this);
         // init preferences
         PreferenceManager.setDefaultValues(this, R.xml.setting, false);
         
