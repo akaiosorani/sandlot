@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <string name="hello">Hello World, SandlotActivity!</string>
     <string name="app_name">Sandlot</string>
     <string name="search">Search</string>
     <string name="clear">Clear</string>
-
+    <string name="title">NDL Search</string>
+    <string name="loading">Now Loading … </string>
+    <string name="type">type</string>
+    <string name="value">Value</string>
+    
 </resources>

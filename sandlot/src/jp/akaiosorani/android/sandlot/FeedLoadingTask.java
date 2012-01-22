@@ -3,6 +3,7 @@ package jp.akaiosorani.android.sandlot;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.AsyncTask;
 
@@ -31,7 +32,7 @@ public class FeedLoadingTask extends AsyncTask<Uri, Integer, ResultContent> {
 	@Override
 	protected void onPreExecute() {
         dialog = new ProgressDialog(parent);
-        dialog.setMessage("読み込み中です、、、");
+        dialog.setMessage(parent.getString(R.string.loading));
         dialog.setIndeterminate(true);
         dialog.setCancelable(true);
         dialog.show();

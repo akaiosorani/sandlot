@@ -26,14 +26,14 @@ public class NdlSearchConditionView extends LinearLayout {
 		setOrientation(LinearLayout.VERTICAL);
 		
 	    TextView label1 = new TextView(context);
-	    label1.setText("type");
+	    label1.setText(context.getString(R.string.type));
 	    addView(label1);
 	    
 	    typeSelector = new Spinner(context);
 	    addView(typeSelector);
 	    
 	    TextView label2 = new TextView(context);
-	    label2.setText("value");
+	    label2.setText(context.getString(R.string.value));
 	    addView(label2);
 	    
 	    valueEdit = new EditText(context);
