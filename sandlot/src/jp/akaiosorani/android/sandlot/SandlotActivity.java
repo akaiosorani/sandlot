@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -38,8 +39,27 @@ public class SandlotActivity extends Activity {
     	}
     };
     
+    private void addCondition() {
+    	LinearLayout layout = (LinearLayout)findViewById(R.id.conditionRoot);
+    	layout.addView(new NdlSearchConditionView(this));
+    	conditionCount++;
+    }
+   
+    private void removeCondition() {
+    	if (conditionCount<=1) {
+    		return;
+    	}
+    	LinearLayout layout = (LinearLayout)findViewById(R.id.conditionRoot);
+    	layout.removeViewAt(layout.getChildCount()-1);
+    	conditionCount--;
+    }
+        
+    private NdlSearchConditionView getConditionView(int pos) {    	
+    	return (NdlSearchConditionView)findViewById(R.id.condition);
+    }
+    
     private String getWord() {
-    	return ((EditText)findViewById(R.id.searchEditText)).getText().toString();
+    	return getConditionView(0).getValue();
     }
     
     private void search() {
@@ -55,9 +75,7 @@ public class SandlotActivity extends Activity {
     }
     
     private void clear() {
-    	((Spinner)findViewById(R.id.searchSpinner)).setSelected(false);
-    	((EditText)findViewById(R.id.searchEditText)).setText("");
-    	// 
+    	getConditionView(0).clear();
     }
     
 }
