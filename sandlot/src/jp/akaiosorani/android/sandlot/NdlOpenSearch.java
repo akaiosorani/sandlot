@@ -10,7 +10,7 @@ public class NdlOpenSearch {
 	
 	private int index = 1;
 	
-	private int count = 10;
+	private int count;
 	
 	private String title = null;
 	
@@ -20,6 +20,14 @@ public class NdlOpenSearch {
 	
 	private String provider = null;
 	
+	public NdlOpenSearch(int count) {
+		this.count = count;
+	}
+	
+	public void setCount(int count) {
+		this.count = count;
+	}
+
 	public Uri build() {
 		String baseString = String.format(URI_FORMAT, NDL_SEARCH_OPENSEARCH_URI, count);
 		StringBuilder builder = new StringBuilder(baseString);

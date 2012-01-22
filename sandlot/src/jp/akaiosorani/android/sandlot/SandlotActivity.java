@@ -72,7 +72,7 @@ public class SandlotActivity extends Activity {
     }
     
     private void search() {
-    	NdlOpenSearch searcher = new NdlOpenSearch();
+    	NdlOpenSearch searcher = new NdlOpenSearch(PreferencesSettings.getCount(this));
     	int type = getType();
     	switch(type) {
     	case 0: 
