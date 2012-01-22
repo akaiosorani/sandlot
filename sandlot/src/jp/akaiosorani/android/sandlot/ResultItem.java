@@ -22,7 +22,7 @@ public class ResultItem {
 		}
 		StringBuilder builder = new StringBuilder();
 		builder.append("<html><head></head><body><h3>%s</h3><ul>");
-		builder.append(String.format("<li>%s:%%s</li>", context.getString(R.string.content_author)));
+		builder.append(String.format("<li>%s:%%s</li>", context.getString(R.string.content_creator)));
 		builder.append(String.format("<li>%s:%%s</li>", context.getString(R.string.content_category)));
 		builder.append(String.format("<li>%s:%%s</li>", context.getString(R.string.content_published)));
 		builder.append(String.format("<li><a href=\"%%s\">%s</a></li>", context.getString(R.string.content_show_details)));

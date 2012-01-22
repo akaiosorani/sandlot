@@ -8,18 +8,35 @@ public class NdlOpenSearch {
 
 	private static String URI_FORMAT = "%s?cnt=%d";
 	
+	private int index = 1;
+	
 	private int count = 10;
 	
 	private String title = null;
 	
-	public void setTitle(String title) {
-		this.title = title;
-	}
+	private String any = null;
+	
+	private String author = null;
+	
+	private String provider = null;
 	
 	public Uri build() {
 		String baseString = String.format(URI_FORMAT, NDL_SEARCH_OPENSEARCH_URI, count);
 		StringBuilder builder = new StringBuilder(baseString);
-		builder.append("&title=").append(Uri.encode(title));
+		if (index > 1) {
+			builder.append("&idx=").append(index);
+		}
+		if (title != null && !title.equals("")) {
+			builder.append("&title=").append(Uri.encode(title));
+		}
+		if (any != null && !any.equals("")) {
+			builder.append("&any=").append(Uri.encode(any));
+		}
+		if (author != null && !author.equals("")) {
+			builder.append("&creator=").append(Uri.encode(author));
+		}
+		
+		
 		Uri query = Uri.parse(builder.toString());
 		return query;
 	}
@@ -27,4 +44,21 @@ public class NdlOpenSearch {
 	public String getQueryString() {
 		return build().toString();
 	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	
+	public void setAny(String any) {
+	    this.any = any;
+    }
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+	
+	public void setProvider(String provider) {
+		this.provider = provider;
+	}
+	
 }

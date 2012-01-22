@@ -2,6 +2,7 @@ package jp.akaiosorani.android.sandlot;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -31,6 +32,13 @@ public class NdlSearchConditionView extends LinearLayout {
 	    
 	    typeSelector = new Spinner(context);
 	    addView(typeSelector);
+	    
+	    ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item);
+	    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+	    adapter.add("タイトル");
+	    adapter.add("著者");
+	    adapter.add("全ての項目");
+	    typeSelector.setAdapter(adapter);
 	    
 	    TextView label2 = new TextView(context);
 	    label2.setText(context.getString(R.string.value));

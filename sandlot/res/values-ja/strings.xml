@@ -14,7 +14,7 @@
     <string name="pref_result_display_name">結果表示</string>
     <string name="pref_result_display_summary">シングルタップでブラウザへジャンプ</string>
     
-    <string name="content_author">著者</string>
+    <string name="content_creator">作成者</string>
     <string name="content_category">カテゴリー</string>
     <string name="content_published">発行日</string>
     <string name="content_show_details">詳細を見る</string>

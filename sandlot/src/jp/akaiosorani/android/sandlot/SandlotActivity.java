@@ -63,14 +63,28 @@ public class SandlotActivity extends Activity {
     private NdlSearchConditionView getConditionView(int pos) {    	
     	return (NdlSearchConditionView)findViewById(R.id.condition);
     }
-    
+
+    private int getType() {
+    	return getConditionView(0).getType();
+    }
     private String getWord() {
     	return getConditionView(0).getValue();
     }
     
     private void search() {
     	NdlOpenSearch searcher = new NdlOpenSearch();
-    	searcher.setTitle(getWord());
+    	int type = getType();
+    	switch(type) {
+    	case 0: 
+        	searcher.setTitle(getWord());
+    		break;
+    	case 1: 
+        	searcher.setAuthor(getWord());
+    		break;
+    	case 2: 
+        	searcher.setAny(getWord());
+    		break;
+    	}
 
     	String queryString = searcher.getQueryString();
     	Toast.makeText(this, queryString, Toast.LENGTH_LONG).show();
