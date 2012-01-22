@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2012 Akaiosorani
+-->
+
+<PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/pref_cat_search">
+    <ListPreference android:key="@string/pref_key_count"
+	                android:title="@string/pref_count_name"
+	                android:summary="@string/pref_count_summary"
+	                android:dialogTitle="@string/pref_count_name"
+	                android:entries="@array/list_count_strings"
+	                android:entryValues="@array/list_count_values" />	            
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/pref_cat_result">
+        
+    <CheckBoxPreference
+            android:key="@string/pref_key_result_display"
+            android:title="@string/pref_result_display_name"
+            android:summary="@string/pref_result_display_summary"  />
+
+    </PreferenceCategory>
+</PreferenceScreen>

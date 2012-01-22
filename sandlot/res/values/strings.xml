@@ -7,5 +7,15 @@
     <string name="loading">Now Loading … </string>
     <string name="type">type</string>
     <string name="value">Value</string>
+    <string name="pref_cat_search">Search Preference</string>
+    <string name="pref_cat_result">Result Preference</string>
+    <string name="pref_count_name">Result Count</string>
+    <string name="pref_count_summary">Settings for result counts with each fetching</string>
+    <string name="pref_result_display_name">Result Display</string>
+    <string name="pref_result_display_summary">Go to content with browser by single tap</string>
+    
+    <!-- no i18n  -->
+    <string name="pref_key_count">count</string>
+    <string name="pref_key_result_display">result_display</string>
     
 </resources>

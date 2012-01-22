@@ -1,8 +1,12 @@
 package jp.akaiosorani.android.sandlot;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -20,6 +24,9 @@ public class SandlotActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+
+        // init preferences
+        PreferenceManager.setDefaultValues(this, R.xml.setting, false);
         
         ((Button) findViewById(R.id.clearButton)).setOnClickListener(clearListener);
         ((Button) findViewById(R.id.searchButton)).setOnClickListener(searchListener);
@@ -77,5 +84,24 @@ public class SandlotActivity extends Activity {
     private void clear() {
     	getConditionView(0).clear();
     }
+    
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+    	menu.add("preferences");
+        return super.onCreateOptionsMenu(menu);
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+    	if (item.getTitle() == "preferences") {
+    		Intent intent = new Intent(this, PreferencesSettings.class);
+    		startActivity(intent);
+    		return true;
+    	}
+    	
+        return super.onOptionsItemSelected(item);
+    }
+    
+    
     
 }

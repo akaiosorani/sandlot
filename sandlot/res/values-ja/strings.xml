@@ -7,5 +7,15 @@
     <string name="loading">読み込み中です、、、</string>
     <string name="type">検索項目</string>
     <string name="value">検索値</string>
+    <string name="pref_cat_search">検索設定</string>
+    <string name="pref_cat_result">結果設定</string>
+    <string name="pref_count_name">検索件数</string>
+    <string name="pref_count_summary">1回に取得する検索結果件数</string>
+    <string name="pref_result_display_name">結果表示</string>
+    <string name="pref_result_display_summary">シングルタップでブラウザへジャンプ</string>
+    
+    <!-- no i18n  -->
+    <string name="pref_key_count">count</string>
+    <string name="pref_key_result_display">result_display</string>
     
 </resources>

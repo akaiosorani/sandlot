@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="list_count_strings">
+		<item>10 件</item>
+		<item>20 件</item>
+		<item>50 件</item>
+		<item>100 件</item>
+		<item>200 件</item>
+	</string-array>
+    <string-array name="list_count_values">
+		<item>10</item>
+		<item>20</item>
+		<item>50</item>
+		<item>100</item>
+		<item>200</item>
+	</string-array>
+</resources>
