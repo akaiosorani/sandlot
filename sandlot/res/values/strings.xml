@@ -4,7 +4,8 @@
     <string name="search">Search</string>
     <string name="clear">Clear</string>
     <string name="title">NDL Search</string>
-    <string name="loading">Now Loading … </string>
+    <string name="msg_loading">Now Loading … </string>
+    <string name="msg_analyzing">Now Analyzing … </string>
     <string name="type">type</string>
     <string name="value">Value</string>
     <string name="pref_cat_search">Search Preference</string>

@@ -118,8 +118,6 @@ public class ResultContent {
         		originalBytes = new byte[buffer.length()];
         		System.arraycopy(buffer.buffer(), 0, originalBytes, 0, buffer.length());
     	    	original = new String(originalBytes, "utf-8");
-            	parse();
-    	        results.put(uri.toString(), this);
         	}
         } catch (IOException e) {
 	        e.printStackTrace();
@@ -128,12 +126,13 @@ public class ResultContent {
         }
 	}
 	
-	private void parse() {
+	public void parse() {
         try {
         	Reader reader = new InputStreamReader(new ByteArrayInputStream(originalBytes));
             SyndFeedInput input = new SyndFeedInput();
 	        feed = input.build(reader);
 	        reader.close();
+	        results.put(uri.toString(), this);
         } catch (IllegalArgumentException e) {
 	        e.printStackTrace();
         } catch (FeedException e) {
@@ -158,7 +157,5 @@ public class ResultContent {
         } catch (IOException e) {
 	        e.printStackTrace();
         }
-    	parse();
-        results.put(uri.toString(), this);
     }
 }
