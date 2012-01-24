@@ -67,8 +67,14 @@ public class SandlotActivity extends Activity {
     private int getType() {
     	return getConditionView(0).getType();
     }
+    private void setType(int type) {
+    	getConditionView(0).setType(type);
+    }
     private String getWord() {
     	return getConditionView(0).getValue();
+    }
+    private void setWord(String value) {
+    	getConditionView(0).setValue(value);
     }
     
     private void search() {
@@ -96,6 +102,29 @@ public class SandlotActivity extends Activity {
     
     private void clear() {
     	getConditionView(0).clear();
+    }
+    
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        
+        outState.putInt("count", conditionCount);
+        for (int i=0;i<conditionCount;i++) {
+        	outState.putInt("type" + Integer.toString(i), getType());
+        	outState.putString("value" + Integer.toString(i), getWord());
+        }
+    }
+    
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        conditionCount = savedInstanceState.getInt("count");
+        for (int i=0;i<conditionCount;i++) {
+        	int type = savedInstanceState.getInt("type" + Integer.toString(i));
+        	String value = savedInstanceState.getString("value" + Integer.toString(i));
+        	setType(type);
+        	setWord(value);
+        }
     }
     
     @Override
